@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_TrafficLight" Id="{81f779f5-7b76-4f95-b1bf-c39a496d423c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_TrafficLight
+VAR
+	tRedDuration: TIME := T#6S;
+	tYellowDuration: TIME := T#2S;
+	tGreenDuration: TIME := T#4S;
+	
+	fbTon: TON;
+	
+	RedLight: BOOL;
+	YellowLight: BOOL;
+	GreenLight: BOOL;
+	
+	nStep: SINT := 0;
+	bStart: BOOL := FALSE;
+	bSwitach: BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bStart THEN
+	CASE nStep OF
+		0: (* GREEN *)
+			TurnOnLight(E_Light.Green);
+			fbTon(IN := TRUE, PT := tGreenDuration);
+			IF fbTon.Q THEN
+				fbTon(IN := FALSE);
+				nStep := 1;
+			END_IF
+		1: (* YELLOW *)
+			TurnOnLight(E_Light.Yellow);
+			fbTon(IN := TRUE, PT := tYellowDuration);
+			IF fbTon.Q THEN
+				fbTon(IN := FALSE);
+				nStep := 2;
+				bSwitach := TRUE;
+			END_IF
+		2: (* RED *)
+			TurnOnLight(E_Light.Red);
+			fbTon(IN := TRUE, PT := tRedDuration);
+			IF fbTon.Q THEN
+				fbTon(IN := FALSE);
+				nStep := 0;
+				bStart := FALSE;
+			END_IF
+	END_CASE
+ELSE
+	TurnOnLight(E_Light.Red);
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="CanSwitch" Id="{e2f04201-4b0b-4fe6-b32c-2397e884ea61}">
+      <Declaration><![CDATA[METHOD PUBLIC CanSwitch : BOOL
+VAR
+	bReturn: BOOL := FALSE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bSwitach THEN
+	bReturn := TRUE;
+	bSwitach := FALSE;
+END_IF
+CanSwitch := bReturn;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Setup" Id="{9d28cf18-c69a-4ced-b8e7-9ebfa135b382}">
+      <Declaration><![CDATA[METHOD PUBLIC Setup
+VAR_INPUT
+	redDuration: TIME;
+	yellowDuration: TIME;
+	greenDuration: TIME;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tRedDuration := redDuration;
+tYellowDuration := yellowDuration;
+tGreenDuration := greenDuration;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Start" Id="{5a072ebf-81f9-45f9-b2ea-6a55a74c44d6}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Start : BOOL]]></Declaration>
+      <Get Name="Get" Id="{6a7a06fd-c816-42d2-9f3e-b289aec12aef}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Start := bStart;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{23f109f4-38da-4ede-a4bf-fbfee4ec65db}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bStart := Start;
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="TurnOnLight" Id="{281268d3-fc86-4842-9db5-5565e552e7bd}">
+      <Declaration><![CDATA[METHOD PRIVATE TurnOnLight
+VAR_INPUT
+	eLight: E_Light;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE eLight OF
+	E_Light.Red:
+		IF NOT RedLight THEN
+			RedLight := TRUE;
+			YellowLight := FALSE;
+			GreenLight := FALSE;
+		END_IF 
+
+	E_Light.Yellow:
+		IF NOT YellowLight THEN
+			RedLight := FALSE;
+			YellowLight := TRUE;
+			GreenLight := FALSE;
+		END_IF 
+
+	
+	E_Light.Green:
+		IF NOT GreenLight THEN
+			RedLight := FALSE;
+			YellowLight := FALSE;
+			GreenLight := TRUE;
+		END_IF 
+
+	ELSE
+		RedLight := FALSE;
+		YellowLight := FALSE;
+		GreenLight := FALSE;
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_TrafficLight">
+      <LineId Id="89" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="92" Count="4" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="72" Count="1" />
+      <LineId Id="75" Count="1" />
+      <LineId Id="79" Count="1" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="100" Count="4" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="137" Count="1" />
+      <LineId Id="90" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLight.CanSwitch">
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLight.Setup">
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLight.Start.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLight.Start.Set">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLight.TurnOnLight">
+      <LineId Id="7" Count="26" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

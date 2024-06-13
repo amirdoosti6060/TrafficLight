@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_TrafficLightController" Id="{3fc0ac03-c5fc-49e7-9c92-f062a7fda4fa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_TrafficLightController
+VAR
+	nNumberOfTrafficLights : SINT;
+	currentLight: SINT := 1;
+	
+	arTrafficLights: ARRAY[1..4] OF FB_TrafficLight;
+	arTrafficLightsInvisible: ARRAY[1..4] OF BOOL;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[StartCurrentTrafficLight();
+
+RefereshAllTrafficLights();
+
+TrySwitchToNextTrafficLight();
+]]></ST>
+    </Implementation>
+    <Property Name="NumberOfTrafficLights" Id="{687c6475-ec52-440a-b0b5-00ed78dcc3ef}">
+      <Declaration><![CDATA[PROPERTY PUBLIC NumberOfTrafficLights : SINT]]></Declaration>
+      <Get Name="Get" Id="{ad8de530-6fc0-4c75-ada0-fed0b8927409}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[NumberOfTrafficLights := nNumberOfTrafficLights;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{2bcee6ce-e8dd-40bd-9a16-8f25ee7518b9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF NumberOfTrafficLights >= 2 AND NumberOfTrafficLights <= 4 THEN
+	nNumberOfTrafficLights := NumberOfTrafficLights;
+	SetVisibleTrafficLights();
+END_IF
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="RefereshAllTrafficLights" Id="{2288413a-7e69-49e8-a317-93a1c9b50390}">
+      <Declaration><![CDATA[METHOD PRIVATE RefereshAllTrafficLights
+VAR
+	index: SINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR index := 1 TO nNumberOfTrafficLights DO
+	arTrafficLights[index]();
+END_FOR 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Setup" Id="{24b403de-5e34-452f-a034-12bcc6c30339}">
+      <Declaration><![CDATA[METHOD PUBLIC Setup
+VAR_INPUT
+	lightNumber: SINT;
+	
+	redDuration: TIME;
+	yellowDuration: TIME;
+	greenDuration: TIME;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF lightNumber >= 1 AND lightNumber <= GVL.MAX_TRAFFIC_LIGHTS THEN
+	arTrafficLights[lightNumber].Setup(redDuration, yellowDuration, greenDuration);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetVisibleTrafficLights" Id="{4e8082c2-1ae0-484b-a686-00360c7b93e5}">
+      <Declaration><![CDATA[METHOD PRIVATE SetVisibleTrafficLights
+VAR
+	idx: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR idx := 1 TO GVL.MAX_TRAFFIC_LIGHTS DO
+	arTrafficLightsInvisible[idx] := TRUE;
+END_FOR
+
+FOR idx := 1 TO nNumberOfTrafficLights DO
+	arTrafficLightsInvisible[idx] := FALSE;
+END_FOR
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartCurrentTrafficLight" Id="{64998691-cd67-45c5-8343-719572b9dc57}">
+      <Declaration><![CDATA[METHOD PRIVATE StartCurrentTrafficLight
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT arTrafficLights[currentLight].Start THEN
+	arTrafficLights[currentLight].Start := TRUE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TrySwitchToNextTrafficLight" Id="{904086e1-c5fb-441f-adf7-b574b1cbcdc5}">
+      <Declaration><![CDATA[METHOD PRIVATE TrySwitchToNextTrafficLight
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF arTrafficLights[currentLight].CanSwitch() THEN
+	currentLight := currentLight + 1;
+	IF currentLight > nNumberOfTrafficLights THEN
+		currentLight := 1;
+	END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_TrafficLightController">
+      <LineId Id="42" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="81" Count="1" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="84" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLightController.NumberOfTrafficLights.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLightController.NumberOfTrafficLights.Set">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLightController.RefereshAllTrafficLights">
+      <LineId Id="6" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLightController.Setup">
+      <LineId Id="13" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLightController.SetVisibleTrafficLights">
+      <LineId Id="15" Count="7" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLightController.StartCurrentTrafficLight">
+      <LineId Id="6" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TrafficLightController.TrySwitchToNextTrafficLight">
+      <LineId Id="6" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

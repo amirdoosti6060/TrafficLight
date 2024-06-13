@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL" Id="{b233d97c-4e18-400a-bd88-a4fa954fb37b}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+	MAX_TRAFFIC_LIGHTS: SINT := 4;
+END_VAR
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

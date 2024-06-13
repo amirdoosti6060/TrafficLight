@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{14432245-9782-4d97-91be-5e69b86d0198}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbTrafficLightController: FB_TrafficLightController;
+	nNumTraffic: SINT := 4;
+	bInitialized: BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bInitialized THEN
+	bInitialized := TRUE;
+	Setup();
+END_IF
+
+fbTrafficLightController();
+]]></ST>
+    </Implementation>
+    <Method Name="Setup" Id="{017bf35d-4b8b-424f-8833-172d4e6e6df5}">
+      <Declaration><![CDATA[METHOD PRIVATE Setup
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbTrafficLightController.NumberOfTrafficLights := nNumTraffic;
+fbTrafficLightController.Setup(2, T#10S, T#3S, T#8S);
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="MAIN">
+      <LineId Id="16" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
+    <LineIds Name="MAIN.Setup">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
