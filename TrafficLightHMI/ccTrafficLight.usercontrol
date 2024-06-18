@@ -1,0 +1,70 @@
+<div id="ccTrafficLight" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControl" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="340" data-tchmi-height="300" data-tchmi-width-unit="px" data-tchmi-height-unit="px" data-tchmi-creator-viewport-width="500" data-tchmi-creator-viewport-height="500">
+
+<div id="RedLight" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="70" data-tchmi-height-unit="px" data-tchmi-left="136" data-tchmi-left-unit="px" data-tchmi-top="24" data-tchmi-top-unit="px" data-tchmi-width="70" data-tchmi-width-unit="px" data-tchmi-zindex="1"   data-tchmi-fill-color="%f%%pp%IsRedOn%/pp% 
+? 
+{
+  &quot;color&quot;: &quot;rgba(255, 0, 0, 1)&quot;
+} 
+:
+{
+  &quot;color&quot;: &quot;rgba(60, 0, 0, 1)&quot;
+}%/f%">
+
+
+<script data-tchmi-target-attribute="data-tchmi-border-color" type="application/json">
+{
+  "color": "rgba(146, 35, 35, 1)"
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div id="YellowLight" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="70" data-tchmi-height-unit="px" data-tchmi-left="136" data-tchmi-left-unit="px" data-tchmi-top="115" data-tchmi-top-unit="px" data-tchmi-width="70" data-tchmi-width-unit="px" data-tchmi-zindex="1" data-tchmi-fill-color="%f%%pp%IsYellowOn%/pp% 
+?
+{
+  &quot;color&quot;: &quot;rgba(255, 255, 0, 1)&quot;
+} 
+:
+{
+  &quot;color&quot;: &quot;rgba(60, 60, 0, 1)&quot;
+} 
+%/f%">
+
+
+<script data-tchmi-target-attribute="data-tchmi-border-color" type="application/json">
+{
+  "color": "rgba(235, 197, 0, 1)"
+}
+</script>
+</div>
+<div id="GreenLight" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="70" data-tchmi-height-unit="px" data-tchmi-left="136" data-tchmi-left-unit="px" data-tchmi-top="207" data-tchmi-top-unit="px" data-tchmi-width="70" data-tchmi-width-unit="px" data-tchmi-zindex="1" data-tchmi-fill-color="%f%%pp%IsGreenOn%/pp%
+?
+{
+  &quot;color&quot;: &quot;rgba(0, 255, 0, 1)&quot;
+}
+:
+{
+  &quot;color&quot;: &quot;rgba(0, 60, 0, 1)&quot;
+}
+%/f%">
+
+
+<script data-tchmi-target-attribute="data-tchmi-border-color" type="application/json">
+{
+  "color": "rgba(146, 35, 35, 1)"
+}
+</script>
+</div>
+<div id="BodyImage" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="300" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-src="Imports/Images/trafficLight-0.svg" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="340" data-tchmi-width-unit="px">
+</div>
+</div>

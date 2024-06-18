@@ -5,6 +5,11 @@
 			<Settings MaxCpus="3" NonWinCpus="1" Packages="2">
 				<Cpu CpuId="2"/>
 			</Settings>
+			<Licenses>
+				<Target>
+					<ManualSelect>{796D380F-D49E-4C0C-A05F-500052FAC883}</ManualSelect>
+				</Target>
+			</Licenses>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -13,7 +18,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{328E9E59-B9C0-4B5C-8121-65D5E36BEE76}" Name="TrafficLightPLC" PrjFilePath="TrafficLightPLC\TrafficLightPLC.plcproj" TmcFilePath="TrafficLightPLC\TrafficLightPLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TrafficLightPLC\TrafficLightPLC.tmc" TmcHash="{F4451952-4A4B-DE8A-83CF-2AD50354A9E4}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TrafficLightPLC\TrafficLightPLC.tmc" TmcHash="{79CDB8EA-0908-2E85-31A7-6BDC39964271}">
 					<Name>TrafficLightPLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

@@ -1,0 +1,58 @@
+{
+  "parameters": [
+    {
+      "name": "data-tchmi-isredon",
+      "displayName": "IsRedOn",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:general#/definitions/BOOL",
+      "category": "",
+      "description": "",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "IsRedOn",
+      "propertySetterName": "setIsRedOn",
+      "propertyGetterName": "getIsRedOn",
+      "refTo": ""
+    },
+    {
+      "name": "data-tchmi-isyellowon",
+      "displayName": "IsYellowOn",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:general#/definitions/BOOL",
+      "category": "",
+      "description": "",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "IsYellowOn",
+      "propertySetterName": "setIsYellowOn",
+      "propertyGetterName": "getIsYellowOn",
+      "refTo": ""
+    },
+    {
+      "name": "data-tchmi-isgreenon",
+      "displayName": "IsGreenOn",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:general#/definitions/BOOL",
+      "category": "",
+      "description": "",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "IsGreenOn",
+      "propertySetterName": "setIsGreenOn",
+      "propertyGetterName": "getIsGreenOn",
+      "refTo": ""
+    }
+  ],
+  "virtualRights": [],
+  "$schema": "./../Packages/Beckhoff.TwinCAT.HMI.Framework.12.760.59/runtimes/native1.12-tchmi/Schema/UserControlConfig.Schema.json",
+  "description": ""
+}
